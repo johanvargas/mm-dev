@@ -13,7 +13,7 @@ const Exercise = props => (
       <Link to={'/edit/' + props.exercise._id}>edit</Link> 
       | 
       <a href='#' onClick={() => { props.deleteExercise(props.exercise._id) }} >delete</a>
-      </td>
+     </td>
   </tr>
 )
 
@@ -33,7 +33,7 @@ export default class ExercisesList extends Component {
       })
       .catch((err) => {
         console.log(err);
-      })
+        })
   }
 
   deleteExercise (id) {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import {useParams} from 'react-router-dom';
 
 export default class EditExercise extends Component {
   constructor(props) {
@@ -21,7 +20,8 @@ export default class EditExercise extends Component {
       description: '',
       duration: 0,
       date: new Date(),
-      users: []
+      users: [],
+      error: ''
     }
   }
 
@@ -37,6 +37,9 @@ export default class EditExercise extends Component {
       })
       .catch(function (error) {
         console.log(error);
+        this.setState({
+          error: "Could not pull data, try again!"
+        });
       })
 
     axios.get('http://localhost:5000/users/')
