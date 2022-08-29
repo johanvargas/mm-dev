@@ -3,18 +3,15 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
-export default class CreateExercise extends Component {
+export default class CreateIngredient extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      name: '',
       description: '',
-      duration: 0,
       date: new Date(),
-      users: []
     }
 
-    console.log('construct component')
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
@@ -74,7 +71,7 @@ export default class CreateExercise extends Component {
     console.log(exercise);
     
 
-    axios.post('http://localhost:17000/exercises/add', exercise) 
+    axios.post('http://localhost:17000/ingredient/add', exercise) 
       .then(res => console.log(res.data))
 
     //window.location = '/';  // prevents a visual on console when active.
@@ -84,7 +81,7 @@ export default class CreateExercise extends Component {
   render() {
     return (
       <div>
-        <h3>Create New Exercise</h3>
+        <h3>Create New Ingredient</h3>
         <form onSubmit={this.onSubmit}>
           <div className='form-group'>
             <label>Username: </label>

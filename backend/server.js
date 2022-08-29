@@ -18,13 +18,13 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
-const exercisesRouter = require('./routes/exercises');
+const recipesRouter = require('./routes/recipes');
 const usersRouter = require('./routes/users');
 
 // mrmanager menu route
 const ingredientRouter = require('./routes/ingredients');
 
-app.use( '/exercises', exercisesRouter);
+app.use( '/recipes', recipesRouter);
 app.use('/users', usersRouter);
 app.use('/ingredients', ingredientRouter);
 
