@@ -19,13 +19,13 @@ connection.once('open', () => {
 });
 
 const recipesRouter = require('./routes/recipes');
-const usersRouter = require('./routes/users');
+// const usersRouter = require('./routes/users');
 
 // mrmanager menu route
 const ingredientRouter = require('./routes/ingredients');
 
 app.use( '/recipes', recipesRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 app.use('/ingredients', ingredientRouter);
 
 app.listen(port, () => {
