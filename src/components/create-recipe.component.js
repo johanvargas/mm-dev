@@ -8,7 +8,7 @@ export default class CreateUser extends Component {
       name: '',
       description: '',
       duration: Number(0),
-      ingredients: Array,
+      ingredients: [],
       notes: '',
       
       ingreds: null,
@@ -65,7 +65,6 @@ export default class CreateUser extends Component {
       notes: e.target.value
     });
   }
-
   onChangeHandler(e) {
     this.search(e.target.value);
     this.setState({ value: e.target.value });
@@ -93,11 +92,9 @@ export default class CreateUser extends Component {
 
     console.log(recipe);
 
-    // backend server is on port 17000
     axios.post('http://localhost:17000/recipes/create', recipe) 
       .then(res => console.log(res.data))
   }
-
   render() {
     return (
       <div>
@@ -109,7 +106,8 @@ export default class CreateUser extends Component {
               required
               className='form-control'
               value={this.state.name}
-              onChange={this.onChangeName} />
+              onChange={this.onChangeName}
+              placeholder='enter name of recipe'/>
           </div>
           <div className="form-group">
             <label>Description: </label>
@@ -117,7 +115,8 @@ export default class CreateUser extends Component {
               required
               className='form-control'
               value={this.state.description}
-              onChange={this.onChangeDescription} />
+              onChange={this.onChangeDescription}
+              placeholder='enter a useful description of how to prepare the recipe'/>
           </div>
           <div className="form-group">
             <label>Duration: </label>
@@ -125,7 +124,8 @@ export default class CreateUser extends Component {
               required
               className='form-control'
               value={this.state.duration}
-              onChange={this.onChangeDuration} />
+              onChange={this.onChangeDuration} 
+              placeholder='how long will this take to make?'/>
           </div>
           <div className="form-group">
             <label>Notes: </label>
@@ -133,7 +133,8 @@ export default class CreateUser extends Component {
               required
               className='form-control'
               value={this.state.notes}
-              onChange={this.onChangeNotes} />
+              onChange={this.onChangeNotes}
+              placeholder='userful notes for the chef'/>
           </div>
           <div className="form-group">
             <label>Ingredients: </label>
@@ -142,13 +143,11 @@ export default class CreateUser extends Component {
               className='form-control'
               value={this.state.value}
               onChange={e => this.onChangeHandler(e)}
-              placeholder='type ingredient to add'
-            />
-
+              placeholder='type ingredient to add'/>
           </div>
             {this.renderIngredients()}
           <div className='form-group'>
-            <input type='submit' value='Create User' className='btn btn-primary' />
+            <input type='submit' value='Create Recipe' className='btn btn-primary' />
         </div>
         </form>
       </div>

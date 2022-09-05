@@ -40,25 +40,21 @@ export default class CreateIngredient extends Component {
       name: e.target.value
     });
   }
-
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
     });
   }
-  
   onChangeServing(e) {
     this.setState({
       serving: e.target.value
     });
   }
-
   onChangeUnit(e) {
     this.setState({
       unit: e.target.value
     });
   }
-
   onSubmit(e) {
     e.preventDefault();
 
@@ -76,7 +72,6 @@ export default class CreateIngredient extends Component {
 
     //window.location = '/';  // prevents a visual on console when active.
   }
-
   render() {
     return (
       <div>
