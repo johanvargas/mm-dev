@@ -9,49 +9,75 @@ export default class CreateUser extends Component {
       description: '',
       duration: Number(0),
       ingredients: Array,
-      notes: ''
+      notes: '',
+      
+      ingreds: null,
+      value: '',
+
     }
 
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onChangeIngredients = this.onChangeIngredients.bind(this);
+    this.onChangeIngredients = this.onChangeHandler.bind(this);
     this.onChangeNotes = this.onChangeNotes.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
 
     this.userInput = React.createRef();
+
+    // search by id for
+    this.search = async val => {
+      const res = await axios.get('http://localhost:17000/ingredients/' + val);
+      console.log(res);
+
+      const ingreds = await res.data.name;
+
+      this.setState({
+        ingreds
+      });
+    }
   }
- 
+
   onChangeName(e) {
     this.setState({
       name: e.target.value
     });
   }
-
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
     });
   }
-
   onChangeDuration (e) {
     this.setState({
       duration: e.target.value
     });
   }
-
   // array, needs something different.
-  onChangeIngredients(e) {
-    this.setState({
-      ingredients: e.target.value
-    });
-  }
-
+ // onChangeIngredients(e) {
+ //   this.setState({
+ //     ingredients: e.target.value
+ //   });
+ // }
   onChangeNotes(e) {
     this.setState({
       notes: e.target.value
     });
+  }
+
+  onChangeHandler(e) {
+    this.search(e.target.value);
+    this.setState({ value: e.target.value });
+  }
+
+  renderIngredients() {
+    let ingreds = <h1>no ingredients yet</h1>;
+    if(this.state.ingreds) {
+      ingreds = <p>{this.state.ingreds}</p>;
+    }
+
+    return ingreds;
   }
 
   onSubmit (e) {
@@ -114,9 +140,13 @@ export default class CreateUser extends Component {
             <input type="text"
               required
               className='form-control'
-              value={this.state.ingredients}
-              onChange={this.onChangeIngredients} />
+              value={this.state.value}
+              onChange={e => this.onChangeHandler(e)}
+              placeholder='type ingredient to add'
+            />
+
           </div>
+            {this.renderIngredients()}
           <div className='form-group'>
             <input type='submit' value='Create User' className='btn btn-primary' />
         </div>
