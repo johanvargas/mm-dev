@@ -11,3 +11,7 @@ start number two on this project
 - build menu frontend
 
 - server provisioning
+
+
+# Suggestions
+Units should be a compiled array or options, not a free string field.

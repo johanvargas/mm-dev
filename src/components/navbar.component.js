@@ -15,7 +15,7 @@ export default class Navbar extends Component {
             <Link to='/create' className='nav-link'>Create Ingredient</Link>
           </li>
            <li className='navbar-item'>
-            <Link to='/recipe' className='nav-link'>Create Recipe</Link>
+            <Link to='/recipes' className='nav-link'>Create Recipe</Link>
           </li>
            <li className='navbar-item'>
             <Link to='/spiegel' className='nav-link'>Spiegel Menu</Link>

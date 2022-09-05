@@ -7,17 +7,19 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route('/create').post((req, res) => {
   const name = req.body.name;
   const description = req.body.description;
   const duration = Number(req.body.duration);
-  const ingredients = Array(req.body.ingredients)
+  const ingredients = Array(req.body.ingredients);
+  const notes = req.body.notes;
 
   const newRecipe = new Recipe({
     name, 
     description,
     duration,
     ingredients,
+    notes
   });
 
   newRecipe.save()

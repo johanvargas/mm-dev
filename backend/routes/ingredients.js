@@ -7,10 +7,18 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route('/create').post((req, res) => {
   const name = req.body.name;
+  const description = req.body.description;
+  const serving = Number(req.body.serving);
+  const unit = req.body.unit;
 
-  const newIngredient = new Ingredient({name});
+  const newIngredient = new Ingredient({
+    name,
+    description,
+    serving,
+    unit
+  });
 
   newIngredient.save()
     .then(() => res.json('Ingredient added!'))
@@ -19,7 +27,7 @@ router.route('/add').post((req, res) => {
 
 router.route('/:id').get((req, res) => {
   Ingredient.findById(req.params.id)
-    .then( items => res.json(items))
+    .then( item => res.json(item))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -31,14 +39,14 @@ router.route('/delete/:id').delete((req, res) => {
 
 router.route('/update/:id').post((req, res) => {
   Ingredient.findById(req.params.id)
-    .then(recipe => {
-      recipe.name = req.body.name; 
-      recipe.description = req.body.description;
-      recipe.duration = Number(req.body.serving);
-      recipe.ingredients = req.body.unit;
+    .then(ingredient => {
+      ingredient.name = req.body.name; 
+      ingredient.description = req.body.description;
+      ingredient.serving = Number(req.body.serving);
+      ingredient.unit = req.body.unit;
 
-      recipe.save()
-        .then(() => res.json('recipe updated.'))
+      ingredient.save()
+        .then(() => res.json('ingredient updated.'))
         .catch(err => res.status(400).json("Error: "+ err));
       })
     .catch(err => res.status(400).json('Error: ' + err));

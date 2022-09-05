@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+//import DatePicker from 'react-datepicker';
+//import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
 export default class CreateIngredient extends Component {
@@ -9,73 +9,72 @@ export default class CreateIngredient extends Component {
     this.state = {
       name: '',
       description: '',
-      date: new Date(),
+      serving: Number(0),
+      unit: '',
     }
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangeServing = this.onChangeServing.bind(this);
+    this.onChangeUnit = this.onChangeUnit.bind(this);
+  
     this.onSubmit = this.onSubmit.bind(this);
 
     this.userInput = React.createRef();
-
-      }
+  }
 
   componentDidMount() {
-    axios.get('http://localhost:17000/users/')
+    axios.get('http://localhost:17000/ingredients/')
       .then(res => {
         if (res.data.length > 0) {
           this.setState({
-            users: res.data.map( user => user.username ),
-            username: 'somebody'
-          })
+            //ingredient: res.data.map( ingred => ingredient.name ),
+            //ingredient: 'Enter ingredient name here'
+          });
         }
-      })
+      });
   }
 
-  onChangeUsername(e) {
+  onChangeName(e) {
     this.setState({
-      username: e.target.value
-    })
+      name: e.target.value
+    });
   }
 
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
-    })
+    });
   }
   
-  onChangeDuration(e) {
+  onChangeServing(e) {
     this.setState({
-      duration: e.target.value
-    })
+      serving: e.target.value
+    });
   }
 
-  onChangeDate(date) {
+  onChangeUnit(e) {
     this.setState({
-      date: date
-    })
+      unit: e.target.value
+    });
   }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const exercise = {
-      username: this.state.username,
+    const ingredient = {
+      name: this.state.name,
       description: this.state.description,
-      duration: this.state.duration,
-      date: this.state.date
+      serving: this.state.serving,
+      unit: this.state.unit
     }
 
-    console.log(exercise);
+    console.log(ingredient);
     
-
-    axios.post('http://localhost:17000/ingredient/add', exercise) 
-      .then(res => console.log(res.data))
+    axios.post('http://localhost:17000/ingredients/create', ingredient) 
+      .then(res => console.log(res.data));
 
     //window.location = '/';  // prevents a visual on console when active.
-
   }
 
   render() {
@@ -84,25 +83,17 @@ export default class CreateIngredient extends Component {
         <h3>Create New Ingredient</h3>
         <form onSubmit={this.onSubmit}>
           <div className='form-group'>
-            <label>Username: </label>
-            <select ref={this.userInput}
-              required
+            <label>Name: </label>
+            <input type='text'
+              required 
               className='form-control'
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option
-                  key={user}
-                    value={user}>{user}
-                  </option>;
-              })
-              }
-            </select>
-      </div>
+              value={this.state.name}
+              onChange={this.onChangeName}
+            />
+        </div>
           <div className='form-group'>
             <label>Description: </label>
-            <input type="text"
+            <input type='text'
               required 
               className='form-control'
               value={this.state.description}
@@ -110,29 +101,30 @@ export default class CreateIngredient extends Component {
             />
           </div>
          <div className='form-group'>
-            <label>Duration( in minutes ): </label>
-            <input type="text"
+            <label>Serving: </label>
+            <input type='text'
               required 
               className='form-control'
-              value={this.state.duration}
-              onChange={this.onChangeDuration}
+              value={this.state.serving}
+              onChange={this.onChangeServing}
             />
           </div>
           <div className='form-group'>
-            <label>Date: </label>
+            <label>Unit: </label>
             <div>
-              <DatePicker
-                selected={this.state.date}
-                onChange={this.onChangeDate}
+              <input type='text'
+                required
+                className='form-control'
+                value={this.state.unit}
+                onChange={this.onChangeUnit}
               />
             </div>
           </div>
-
           <div className='form-group'>
-            <input type='submit' value='Create Exercise Log' className='btn btn-primary' />
+            <input type='submit' value='Create Ingredient' className='btn btn-primary' />
           </div>
         </form>
         </div>
-    )
+    );
   }
 }
