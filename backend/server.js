@@ -1,5 +1,3 @@
-// dev server, should stay that way
-
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');

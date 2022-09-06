@@ -12,10 +12,13 @@ export default class Navbar extends Component {
             <Link to='/' className='nav-link'>Ingredients</Link>
           </li>
           <li className='navbar-item'>
-            <Link to='/create' className='nav-link'>Create Ingredient</Link>
+            <Link to='/recipes/list' className='nav-link'>Recipes</Link>
+          </li>
+          <li className='navbar-item'>
+            <Link to='/ingredients/create' className='nav-link'>Create Ingredient</Link>
           </li>
            <li className='navbar-item'>
-            <Link to='/recipes' className='nav-link'>Create Recipe</Link>
+            <Link to='/recipes/create' className='nav-link'>Create Recipe</Link>
           </li>
            <li className='navbar-item'>
             <Link to='/spiegel' className='nav-link'>Spiegel Menu</Link>
@@ -24,6 +27,6 @@ export default class Navbar extends Component {
         </ul>
       </div>
       </nav>
-    )
+    );
   }
 }
