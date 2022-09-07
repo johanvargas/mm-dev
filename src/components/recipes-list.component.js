@@ -31,7 +31,6 @@ export default class RecipesList extends Component {
         console.log( "Axios is returning an error: ", err);
       })
   }
-
   deleteRecipe(id) {
      axios.delete('http://localhost:17000/recipes/' + id)
       .then(res => console.log(res.data));
@@ -39,7 +38,6 @@ export default class RecipesList extends Component {
       recipes: this.state.recipe.filter(el => el._id !== id) 
     });
   }
-
   recipeList() {
     return this.state.recipes.map(currentrecip => {
       return <Recipes recipe={currentrecip} 

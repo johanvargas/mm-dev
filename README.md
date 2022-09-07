@@ -1,21 +1,10 @@
-# mm-dev
-Start number two on this project
+# mm-dev - dev version of project
 
-CRUD actions on
-  ingredients --> recipes --> menu items --> menu
+Dynamically updating food menu based on inventory ( more advanced considerations to be added after this phase is complete )
 
-Live updating Menu based on inventory.
+ingredients --> recipes --> menu items --> menu
 
-#TODO
-
-- clone exercise examples for CRUD on:
-    ingredients
-    recipes
-    menu items
-- build menu backend
-- build menu frontend
-
-- server provisioning
-
-# Suggestions
-Units should be a compiled array or options, not a free string field.
+#TODO db, create indexes for ingredients ( to be used by recipes ) & recipes ( to be used by menu )
+#TODO finish crud full functionality
+#TODO dynamic add to array field
+#TODO menu populate
