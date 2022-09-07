@@ -23,7 +23,7 @@ router.route('/create').post((req, res) => {
   });
 
   newRecipe.save()
-    .then(() => res.json('recipe added!'))
+    .then(() => res.json('Recipe added!'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -33,7 +33,7 @@ router.route('/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('/delete/:id').delete((req, res) => {
   Recipe.findByIdAndDelete(req.params.id)
     .then(() => res.json('recipe deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -42,10 +42,11 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Recipe.findById(req.params.id)
     .then(recipe => {
-      recipe.name = req.body.username; 
+      recipe.name = req.body.name; 
       recipe.description = req.body.description;
       recipe.duration = Number(req.body.duration);
       recipe.ingredients = Array(req.body.ingredients);
+      recipe.notes = req.body.notes;
 
       recipe.save()
         .then(() => res.json('recipe updated.'))

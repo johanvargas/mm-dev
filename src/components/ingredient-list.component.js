@@ -11,7 +11,7 @@ const Ingredients = props => (
     <td>{props.ingredient.unit}</td>
 
     <td>
-      <Link to={'/edit/' + props.ingredient._id}>edit</Link> 
+      <Link to={'/update/' + props.ingredient._id}>edit</Link> 
       | 
      </td>
   </tr>

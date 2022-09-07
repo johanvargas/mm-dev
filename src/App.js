@@ -12,6 +12,8 @@ import RecipeList from './components/recipes-list.component';
 import CreateRecipe from './components/create-recipe.component';
 import EditRecipe from './components/edit-recipe.component';
 
+import Spiegel from './components/spiegel.component';
+
 function App() {
   return (
   <BrowserRouter>
@@ -22,12 +24,14 @@ function App() {
 
         <Route path="/ingredients" exact element={<IngredientList />} />
         <Route path="/ingredients/create" element={<CreateIngredient />} />
-        <Route path="/ingredients/edit/:id" element={<EditIngredient />} />
+        <Route path="/ingredients/update/:id" element={<EditIngredient />} />
 
        
         <Route path="/recipes" exact element={<RecipeList />} />
         <Route path="/recipes/create" element={<CreateRecipe />} />
-        <Route path="/recipes/edit/:id" element={<EditRecipe />} />
+        <Route path="/recipes/update/:id" element={<EditRecipe />} />
+        
+        <Route path="/spiegel" element={<Spiegel />} />
 
       </Routes>
     </div>

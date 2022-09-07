@@ -33,7 +33,7 @@ router.route('/:id').get((req, res) => {
 
 router.route('/delete/:id').delete((req, res) => {
   Ingredient.findByIdAndDelete(req.params.id)
-    .then(() => res.json('recipe deleted.'))
+    .then(() => res.json('ingredient deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
