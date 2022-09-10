@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ServerError from './servererror.component';
 import axios from 'axios';
 
 const Recipes = props => (
@@ -20,15 +21,19 @@ export default class RecipesList extends Component {
   constructor (props) {
     super (props);
 //    this.deleteExercise= this.deleterecipe.bind(this);
-    this.state = { recipes: []};
+    this.state = {
+      connection: false,
+      recipes: []
+    };
   }
   componentDidMount() {
     axios.get('http://localhost:17000/recipes/')
       .then(res => {
-        this.setState({ recipes: res.data })
+        this.setState({ recipes: res.data, connection: true })
       })
       .catch((err) => {
         console.log( "Axios is returning an error: ", err);
+        this.setState({ connection: false })
       })
   }
   deleteRecipe(id) {
@@ -46,24 +51,28 @@ export default class RecipesList extends Component {
     });
   }
   render() {
-    return (
-      <div>
-        <h3>Logged Recipes</h3>
-        <table className='table'>
-          <thead className='thead-light'>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Duration</th>
-              <th>Notes</th>
-              <th>Ingredients</th>
-            </tr>
-            </thead>
-          <tbody>
-            {this.recipeList()}
-          </tbody>
-        </table>
-      </div>
-    );
+    if (this.state.connection) {
+      return (
+        <div>
+          <h3>Logged Recipes</h3>
+          <table className='table'>
+            <thead className='thead-light'>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Duration</th>
+                <th>Notes</th>
+                <th>Ingredients</th>
+              </tr>
+              </thead>
+            <tbody>
+              {this.recipeList()}
+            </tbody>
+          </table>
+        </div>
+      );
+    } else {
+      return <ServerError />;
+    }
   }
 }
