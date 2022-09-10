@@ -11,7 +11,7 @@ const Recipes = props => (
     <td>{props.recipe.notes}</td>
     <td>{props.recipe.ingredients}</td>
     <td>
-      <Link to={'/update/' + props.recipe._id}>edit</Link> 
+      <Link to={'/recipes/update/' + props.recipe._id}>edit</Link> 
       | delete 
      </td>
   </tr>

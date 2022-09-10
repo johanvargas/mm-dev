@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import DatePicker from 'react-datepicker'; * left here as a reference
-//import "react-datepicker/dist/react-datepicker.css";
+import { useParams } from 'react-router-dom';
 
-export default class EditIngredient extends Component {
+class EditIngredient extends Component {
   constructor(props) {
     super(props);
+
     // name, description, serving, unit
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
@@ -13,19 +13,25 @@ export default class EditIngredient extends Component {
     this.onChangeUnit = this.onChangeUnit.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.userInput = React.createRef();
+
+    const { id } = this.props.params;
+
     this.state = {
-      username: '',
+      new_id: id,
+      name: '',
       description: '',
       serving: 0,
       unit: '',
       error: ''
     }
   }
+
   componentDidMount() {
-    axios.get('http://localhost:5000/ingredients/'+this.props.match.params.id)
+    axios.get('http://localhost:17000/ingredients/'+ this.state.new_id)
       .then(response => {
+        console.log(response)
         this.setState({
-          username: response.data.name,
+          name: response.data.name,
           description: response.data.description,
           serving: response.data.serving,
           unit: response.data.unit
@@ -38,6 +44,7 @@ export default class EditIngredient extends Component {
         });
       })
   }
+  
   onChangeName(e) {
     this.setState({
       name: e.target.value
@@ -58,6 +65,7 @@ export default class EditIngredient extends Component {
       unit: e.target.value
     });
   }
+ 
   onSubmit(e) {
     e.preventDefault();
 
@@ -69,9 +77,9 @@ export default class EditIngredient extends Component {
       unit: this.state.unit
     }
 
-    console.log(ingredient);
+    console.log(this.state.new_id);
 
-    axios.post('http://localhost:5000/ingredients/update/' + this.props.match.params.id, ingredient)
+    axios.post('http://localhost:17000/ingredients/update/' + this.state.new_id, ingredient)
       .then(res => console.log(res.data));
 
     // window.location = '/';
@@ -123,3 +131,5 @@ export default class EditIngredient extends Component {
     );
   }
 }
+
+export default (props) => (<EditIngredient {...props} params={useParams()} />)
