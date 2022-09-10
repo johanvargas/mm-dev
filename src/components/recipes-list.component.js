@@ -12,8 +12,9 @@ const Recipes = props => (
     <td>{props.recipe.ingredients}</td>
     <td>
       <Link to={'/recipes/update/' + props.recipe._id}>edit</Link> 
-      | delete 
-     </td>
+      &nbsp;|&nbsp;
+      <a href="#" onClick={() => { props.deleteRecipe(props.recipe._id) }}>delete</a>
+    </td>
   </tr>
 )
 
@@ -36,13 +37,7 @@ export default class RecipesList extends Component {
         this.setState({ connection: false })
       })
   }
-  deleteRecipe(id) {
-     axios.delete('http://localhost:17000/recipes/' + id)
-      .then(res => console.log(res.data));
-    this.setState({ 
-      recipes: this.state.recipe.filter(el => el._id !== id) 
-    });
-  }
+
   recipeList() {
     return this.state.recipes.map(currentrecip => {
       return <Recipes recipe={currentrecip} 
@@ -50,6 +45,15 @@ export default class RecipesList extends Component {
         key={currentrecip._id}/>
     });
   }
+
+  deleteRecipe(id) {
+    axios.delete('http://localhost:17000/recipes/delete/' + id)
+      .then(res => console.log(res.data));
+    this.setState({
+      recipes: this.state.recipe.filter(el => el._id !== id)
+    });
+  }
+
   render() {
     if (this.state.connection) {
       return (

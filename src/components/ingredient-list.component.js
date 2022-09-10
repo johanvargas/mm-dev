@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ServerError from './servererror.component';
 import axios from 'axios';
 
+// delete needs a confirm state
 const Ingredients = props => (
   <tr>
     <td>{props.ingredient.name}</td>
@@ -11,7 +12,8 @@ const Ingredients = props => (
     <td>{props.ingredient.unit}</td>
     <td>
       <Link to={'/ingredients/update/' + props.ingredient._id}>edit</Link> 
-      | 
+      &nbsp;|&nbsp;
+      <a href="#" onClick={() => { props.deleteIngredient(props.ingredient._id)}}>delete</a>  
      </td>
   </tr>
 )
@@ -41,12 +43,13 @@ export default class IngredientsList extends Component {
   }
 
   deleteIngredient(id) {
-     axios.delete('http://localhost:17000/ingredients/' + id)
+     axios.delete('http://localhost:17000/ingredients/delete/' + id)
       .then(res => console.log(res.data));
     this.setState({ 
       ingredients: this.state.ingredient.filter(el => el._id !== id) 
     });
   }
+
   ingredientList () {
     return this.state.ingredients.map(currentingr => {
       return <Ingredients ingredient={currentingr} 
@@ -54,12 +57,13 @@ export default class IngredientsList extends Component {
         key={currentingr._id}/>
     });
   }
+
   render() {
     if(this.state.connection) {
       return (
         <div>
           <h3>Logged Ingredients</h3>
-          <table className='table'>
+            <table className='table'>
             <thead className='thead-light'>
               <tr>
                 <th>Name</th>
@@ -67,10 +71,10 @@ export default class IngredientsList extends Component {
                 <th>Serving</th>
                 <th>Unit</th>
               </tr>
-              </thead>
+            </thead>
             <tbody>
               {this.ingredientList()}
-              </tbody>
+            </tbody>
             </table>
         </div>
       );

@@ -1,9 +1,9 @@
 # mm-dev - dev version of project
 
-Dynamically updating food menu based on inventory ( more advanced considerations to be added after this phase is complete )
+MrManagr ( entire suite ), Spiegel ( Dynamic Menu )
 
-ingredients --> recipes --> menu items --> menu
-#TODO Edit action
+Dynamically updating food menu based on inventory ( more advanced considerations to come )
+
 #TODO delete action
 #TODO adding ingredients properly from db indices.
 #TODO db, create indexes for ingredients ( to be used by recipes ) & recipes ( to be used by menu )
