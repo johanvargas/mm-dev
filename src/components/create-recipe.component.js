@@ -27,13 +27,11 @@ export default class CreateUser extends Component {
 
     this.userInput = React.createRef();
 
-    // search by id for
+    // search by name field
+    // next step is to have regex and populate a list of relavent ingredients
     this.search = async val => {
-      console.log("search is working on it!")
       const res = await axios.get('http://localhost:17000/ingredients/text/' + val);
-      console.log("res is : ", res);
       const ingreds = res.data[0]['name'];  
-      console.log("ingreds is : ", ingreds);
 
       this.setState({
         ingreds
@@ -56,27 +54,24 @@ export default class CreateUser extends Component {
       duration: e.target.value
     });
   }
-  // array, needs something different.
- // onChangeIngredients(e) {
- //   this.setState({
- //     ingredients: e.target.value
- //   });
- // }
+
   onChangeNotes(e) {
     this.setState({
       notes: e.target.value
     });
   }
 
+  // Ingredients handling and helpers
   onChangeHandler(e) {
     this.search(e.target.value);
     this.setState({ value: e.target.value });
   }
 
   renderIngredients() {
-    let ingreds = <h3>no ingredients yet</h3>;
+    let ingreds = <h3>no ingredients found...</h3>;
     if(this.state.ingreds) {
-      ingreds = <h3>{this.state.ingreds}</h3>;
+      //ingreds = <h3>{this.state.ingreds}</h3>;
+      ingreds = bindIngredient(this.state.ingreds);
     }
     return ingreds;
   }
@@ -100,7 +95,7 @@ export default class CreateUser extends Component {
   render() {
     return (
       <div>
-        <h3>Create New Recipe</h3>
+        <h3>Add New Recipe</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Name: </label>
@@ -147,7 +142,10 @@ export default class CreateUser extends Component {
               onChange={e => this.onChangeHandler(e)}
               placeholder='type ingredient to add'/>
           </div>
+          <br/>
+          <p>These are the available ingredients in you pantry...</p>
             {this.renderIngredients()}
+          <br/>
           <div className='form-group'>
             <input type='submit' value='Create Recipe' className='btn btn-primary' />
         </div>

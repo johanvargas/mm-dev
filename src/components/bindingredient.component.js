@@ -1,12 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-
-const content = 
-  <div>
-    <p>This should be the ingredient name to be added to the array.</p>
-  </div>
-
-export default function bindIngredient() {
-  return content;
+export default function bindIngredient(ingredient) {
+  return (
+    <div className='d-flex justify-content-between'>
+      <h3>{ingredient}</h3>
+      <button className='btn btn-secondary' onClick="#">Add This Ingredient</button>
+    </div>
+    )
 }
