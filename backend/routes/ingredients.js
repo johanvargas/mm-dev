@@ -31,6 +31,15 @@ router.route('/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/text/:name').get((req, res) => {
+  Ingredient.find({ "name": req.params.name})
+    .then( item => {
+      res.json(item)
+      console.log( "item is : ", item);
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/delete/:id').delete((req, res) => {
   Ingredient.findByIdAndDelete(req.params.id)
     .then(() => res.json('ingredient deleted.'))

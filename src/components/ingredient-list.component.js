@@ -21,7 +21,6 @@ const Ingredients = props => (
 export default class IngredientsList extends Component {
   constructor (props) {
     super (props);
-//    this.deleteExercise= this.deleteIngredient.bind(this);
     this.state = { 
       connection: false,
       ingredients: [],

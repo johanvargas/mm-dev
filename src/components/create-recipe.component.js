@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import bindIngredient from './bindingredient.component';
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -28,10 +29,11 @@ export default class CreateUser extends Component {
 
     // search by id for
     this.search = async val => {
-      const res = await axios.get('http://localhost:17000/ingredients/' + val);
-      console.log(res);
-
-      const ingreds = await res.data.name;
+      console.log("search is working on it!")
+      const res = await axios.get('http://localhost:17000/ingredients/text/' + val);
+      console.log("res is : ", res);
+      const ingreds = res.data[0]['name'];  
+      console.log("ingreds is : ", ingreds);
 
       this.setState({
         ingreds
@@ -65,17 +67,17 @@ export default class CreateUser extends Component {
       notes: e.target.value
     });
   }
+
   onChangeHandler(e) {
     this.search(e.target.value);
     this.setState({ value: e.target.value });
   }
 
   renderIngredients() {
-    let ingreds = <h1>no ingredients yet</h1>;
+    let ingreds = <h3>no ingredients yet</h3>;
     if(this.state.ingreds) {
-      ingreds = <p>{this.state.ingreds}</p>;
+      ingreds = <h3>{this.state.ingreds}</h3>;
     }
-
     return ingreds;
   }
 
