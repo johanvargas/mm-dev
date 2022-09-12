@@ -11,10 +11,7 @@ export default class CreateUser extends Component {
       duration: Number(0),
       ingredients: [],
       notes: '',
-      
       ingreds: null,
-      value: '',
-
     }
 
     this.onChangeName = this.onChangeName.bind(this);
@@ -34,7 +31,7 @@ export default class CreateUser extends Component {
       const ingreds = res.data[0]['name'];  
 
       this.setState({
-        ingreds
+        ingreds // is being interpreted as an array?
       });
     }
   }
@@ -44,11 +41,13 @@ export default class CreateUser extends Component {
       name: e.target.value
     });
   }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
     });
   }
+
   onChangeDuration (e) {
     this.setState({
       duration: e.target.value
@@ -64,14 +63,34 @@ export default class CreateUser extends Component {
   // Ingredients handling and helpers
   onChangeHandler(e) {
     this.search(e.target.value);
-    this.setState({ value: e.target.value });
+  }
+
+
+  addIngredientField(ing) {
+    this.setState({
+      ingredient: ing 
+    })
+  }
+
+  // this is not stateful, infinite recursion, needless to say, DOES NOT WORK!!!
+  bindIngredient(ingredient) {
+    return (
+    <div className='d-flex justify-content-between'>
+      <h3>{ingredient}</h3>
+      <button className='btn btn-secondary' onClick={this.addIngredientField(ingredient)}>Add This Ingredient</button>
+    </div>
+    )
+  }
+
+  removeIngredientField() {
+    return;
   }
 
   renderIngredients() {
     let ingreds = <h3>no ingredients found...</h3>;
     if(this.state.ingreds) {
       //ingreds = <h3>{this.state.ingreds}</h3>;
-      ingreds = bindIngredient(this.state.ingreds);
+      ingreds = this.bindIngredient(this.state.ingreds);
     }
     return ingreds;
   }
