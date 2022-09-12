@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Card from './card.component';
 
 export default class Navbar extends Component {
   render() {
     return (
-      <div>
-        <p>Your Menu Goes here.</p>
+      <div className="container-fluid">
+        <Card />
       </div>
     );
   }
