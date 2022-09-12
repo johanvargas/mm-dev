@@ -5,9 +5,9 @@ export default function Card() {
     <div className="container text-center">
       <div className="row"></div> 
         <div className="col">Beverages</div> 
-        <div className="col">Starters</div> 
+        <div className="col-6">Starters</div> 
       <div className="row"></div> 
-        <div className="col">Entrees</div> 
+        <div className="col-5">Entrees</div> 
         <div className="col">Sides</div> 
     </div>
   )
