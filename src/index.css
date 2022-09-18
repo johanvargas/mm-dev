@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.recipe-msg {
+  padding: 15px;
+  border-radius: 15px;
+  color: blue;
+}

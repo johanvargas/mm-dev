@@ -19,6 +19,7 @@ export default class CreateUser extends Component {
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeIngredients = this.onChangeHandler.bind(this);
     this.onChangeNotes = this.onChangeNotes.bind(this);
+    this.addIngredientField = this.addIngredientField.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
 
@@ -65,10 +66,10 @@ export default class CreateUser extends Component {
     this.search(e.target.value);
   }
 
-
   addIngredientField(ing) {
+    const newIngred= ing.target.value;
     this.setState({
-      ingredient: ing 
+      ingredients: [...this.state.ingredients, newIngred]
     })
   }
 
@@ -77,13 +78,9 @@ export default class CreateUser extends Component {
     return (
     <div className='d-flex justify-content-between'>
       <h3>{ingredient}</h3>
-      <button className='btn btn-secondary' onClick={this.addIngredientField(ingredient)}>Add This Ingredient</button>
+      <button className='btn btn-secondary' value={this.state.ingreds} onClick={this.addIngredientField}>Add This Ingredient</button>
     </div>
     )
-  }
-
-  removeIngredientField() {
-    return;
   }
 
   renderIngredients() {
@@ -111,6 +108,7 @@ export default class CreateUser extends Component {
     axios.post('http://localhost:17000/recipes/create', recipe) 
       .then(res => console.log(res.data))
   }
+
   render() {
     return (
       <div>
@@ -162,13 +160,15 @@ export default class CreateUser extends Component {
               placeholder='type ingredient to add'/>
           </div>
           <br/>
-          <p>These are the available ingredients in you pantry...</p>
-            {this.renderIngredients()}
+          <h5 className="border border-primary recipe-msg">These are the available ingredients in you pantry...</h5>
+
           <br/>
           <div className='form-group'>
             <input type='submit' value='Create Recipe' className='btn btn-primary' />
         </div>
         </form>
+
+            {this.renderIngredients()}
       </div>
     );
   }
