@@ -9,7 +9,9 @@ const Recipes = props => (
     <td>{props.recipe.description}</td>
     <td>{props.recipe.duration}</td>
     <td>{props.recipe.notes}</td>
-    <td>{props.recipe.ingredients}</td>
+    <td>{props.recipe.ingredients.map((i, index) => {
+      return <p key={index}>{i}</p>
+    })}</td>
     <td>
       <Link to={'/recipes/update/' + props.recipe._id}>edit</Link> 
       &nbsp;|&nbsp;

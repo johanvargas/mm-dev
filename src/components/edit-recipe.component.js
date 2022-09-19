@@ -13,7 +13,6 @@ import { useParams } from 'react-router-dom';
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeNotes = this.onChangeNotes.bind(this);
     this.onChangeIngredients = this.onChangeIngredients.bind(this);
-    this.onChangeIngredArray = this.onChangeIngredArray.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
     
@@ -79,17 +78,16 @@ import { useParams } from 'react-router-dom';
      })
    }
 
-   // should be seperate component
+   // should be component that can only be removed.
+   // onMouseOver, remove button appears
+   // onClick, remove items
+   // 
+   // seperately a add ingredient button should be at the top of list
+   // w/ input field, add to ingredients array on submit
    onChangeIngredients(e) {
-     this.setState({
-       ingredients: e.target.value
-     })
+     console.log(e);
    }
 
-   onChangeIngredArray() {
-     return;
-   }
-  
   onSubmit(e) {
      e.preventDefault();
 
@@ -152,7 +150,7 @@ import { useParams } from 'react-router-dom';
               <label>Ingredients: </label>
               {
                 this.state.ingredients.map((i, index) => {
-                  return <p key={index}>{i}</p>
+                  return <p className="form-control" value={i} onMouseOver={this.onChangeIngredients} key={index}>{i}</p>
                 })
               }
             </div>

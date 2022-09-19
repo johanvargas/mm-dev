@@ -159,14 +159,12 @@ export default class CreateUser extends Component {
               placeholder='type ingredient to add'/>
           </div>
           <br/>
-          <h5 className="border border-primary recipe-msg">These are the available ingredients in you pantry...</h5>
-
-          <br/>
           <div className='form-group'>
             <input type='submit' value='Create Recipe' className='btn btn-primary' />
         </div>
         </form>
 
+        <h5 className="border border-primary mt-5 recipe-msg">These are the available ingredients in you pantry...</h5>
             {this.renderIngredients()}
       </div>
     );

@@ -11,7 +11,7 @@ router.route('/create').post((req, res) => {
   const name = req.body.name;
   const description = req.body.description;
   const duration = Number(req.body.duration);
-  const ingredients = Array(req.body.ingredients);
+  const ingredients = req.body.ingredients;
   const notes = req.body.notes;
 
   const newRecipe = new Recipe({
