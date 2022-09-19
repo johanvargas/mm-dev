@@ -13,8 +13,10 @@ import { useParams } from 'react-router-dom';
     this.onChangeDuration = this.onChangeDuration.bind(this);
     this.onChangeNotes = this.onChangeNotes.bind(this);
     this.onChangeIngredients = this.onChangeIngredients.bind(this);
+    this.onChangeIngredArray = this.onChangeIngredArray.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
+    
     this.userInput = React.createRef();
     
     const { id } = this.props.params;
@@ -25,7 +27,7 @@ import { useParams } from 'react-router-dom';
       description: '',
       duration: Number,
       notes: '',
-      ingredients: Array,
+      ingredients: [],
 
       message: 'Nothing to see here...',
       error: '' 
@@ -41,14 +43,14 @@ import { useParams } from 'react-router-dom';
           description: response.data.description,
           duration: Number(response.data.duration),
           notes: response.data.notes,
-          ingredients: Array(response.data.ingredients),
+          ingredients: [...response.data.ingredients],
           message: 'Wow, we found something, but can\'t load it yet...'
         })
       })
       .catch(function(err) {
         console.log(err);
         this.setState({
-          error: 'Could not connect to db...'
+          error: 'There seems to be a bug in the system...'
         })
       })
   }
@@ -84,7 +86,11 @@ import { useParams } from 'react-router-dom';
      })
    }
 
-   onSubmit(e) {
+   onChangeIngredArray() {
+     return;
+   }
+  
+  onSubmit(e) {
      e.preventDefault();
 
      const recipe = {
@@ -135,21 +141,22 @@ import { useParams } from 'react-router-dom';
               <label>Notes: </label>
               <div>
                 <input
+                  className="form-control"
                   type="text"
                   selected={this.state.notes}
+                  value={this.state.notes}
                   onChange={this.onChangeNotes}/>
               </div>
             </div>
             <div className="form-group">
               <label>Ingredients: </label>
-              <div>
-                <input
-                  type="text"
-                  selected={this.state.ingredients}
-                  onChange={this.onChangeIngredients}/>
-              </div>
+              {
+                this.state.ingredients.map((i, index) => {
+                  return <p key={index}>{i}</p>
+                })
+              }
             </div>
-            <div className="form-group">
+            <div className="form-group mt-4">
               <input type="submit" value="Update Recipe" className="btn btn-primary" />
             </div>
           </form>

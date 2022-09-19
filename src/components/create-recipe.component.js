@@ -73,7 +73,6 @@ export default class CreateUser extends Component {
     })
   }
 
-  // this is not stateful, infinite recursion, needless to say, DOES NOT WORK!!!
   bindIngredient(ingredient) {
     return (
     <div className='d-flex justify-content-between'>
