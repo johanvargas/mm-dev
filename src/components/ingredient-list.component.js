@@ -24,6 +24,7 @@ export default class IngredientsList extends Component {
     this.state = { 
       connection: false,
       ingredients: [],
+      count: 0
     };
   }
 
@@ -32,7 +33,8 @@ export default class IngredientsList extends Component {
       .then(res => {
         this.setState({ 
           connection: true,
-          ingredients: res.data 
+          ingredients: res.data,
+          count: this.getTotal()
         })
       })
       .catch((err) => {
@@ -49,7 +51,7 @@ export default class IngredientsList extends Component {
     });
   }
 
-  ingredientList () {
+  ingredientList() {
     return this.state.ingredients.map(currentingr => {
       return <Ingredients ingredient={currentingr} 
         deleteIngredient={this.deleteIngredient}
@@ -57,11 +59,26 @@ export default class IngredientsList extends Component {
     });
   }
 
+  getTotal() {
+    axios.get('http://localhost:17000/ingredients/count/')
+      .then(res => {
+        this.setState({
+          count: res.data
+        })
+      })
+      .catch((err) => {
+        console.log("Axios error ", err);
+        this.setState({ connection: false })
+      })
+  }
+
   render() {
     if(this.state.connection) {
       return (
         <div>
           <h3>Logged Ingredients</h3>
+          <h4>Total Ingredients Available</h4>
+            <p>{this.state.count}</p>
             <table className='table'>
             <thead className='thead-light'>
               <tr>

@@ -25,6 +25,12 @@ router.route('/create').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/count').get((req, res) => {
+  Ingredient.count()
+    .then(field => res.json(field))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/:id').get((req, res) => {
   Ingredient.findById(req.params.id)
     .then( item => res.json(item))
