@@ -1,0 +1,21 @@
+// requires popper.js
+import React, { Component } from 'react';
+//import { Link } from 'react-router-dom';
+import { Dropdown } from 'react-bootstrap/Dropdown';
+
+export default class NavbarDropdown extends Component {
+  render() {
+    return (
+      <Dropdown>
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">Botoncito</Dropdown.Toggle>
+        <Dropdown.Menu>
+            <Dropdown.Item>Ingredients</Dropdown.Item>
+            <Dropdown.Item>Recipes</Dropdown.Item>
+            <Dropdown.Item>Create Ingredient</Dropdown.Item>
+            <Dropdown.Item>Create Recipe</Dropdown.Item>
+            <Dropdown.Item>Spiegel Menu</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  }
+}
