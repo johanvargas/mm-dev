@@ -118,8 +118,9 @@ class EditIngredient extends Component {
           <label>Unit: </label>
           <div>
             <input
+              className="form-control"
               type="text"
-              selected={this.state.unit}
+              value={this.state.unit}
               onChange={this.onChangeUnit}/>
           </div>
         </div>

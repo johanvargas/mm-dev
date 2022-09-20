@@ -13,8 +13,10 @@ const Ingredients = props => (
     <td>
       <Link to={'/ingredients/update/' + props.ingredient._id}>edit</Link> 
       &nbsp;|&nbsp;
-      <a href="#" onClick={() => { props.deleteIngredient(props.ingredient._id)}}>delete</a>  
-     </td>
+      <a href="#" onClick={() => { props.deleteIngredient(props.ingredient._id)}}>delete</a>
+      &nbsp;|&nbsp;
+      <Link to={'/ingredients/create/'}>create</Link> 
+    </td>
   </tr>
 )
 
@@ -47,8 +49,10 @@ export default class IngredientsList extends Component {
      axios.delete('http://localhost:17000/ingredients/delete/' + id)
       .then(res => console.log(res.data));
     this.setState({ 
-      ingredients: this.state.ingredient.filter(el => el._id !== id) 
+      ingredients: this.state.ingredients.filter(el => el._id !== id) 
     });
+
+    window.location="/";
   }
 
   ingredientList() {
@@ -77,8 +81,15 @@ export default class IngredientsList extends Component {
       return (
         <div>
           <h3>Logged Ingredients</h3>
-          <h4>Total Ingredients Available</h4>
-            <p>{this.state.count}</p>
+          <div className="container">
+            <div className="alert alert-success row">
+              <h4 className="col-11">Total Ingredients Available</h4>
+              <div className="col-1">
+                <h4>{this.state.count}
+                </h4>
+              </div>
+            </div>
+          </div>
             <table className='table'>
             <thead className='thead-light'>
               <tr>
