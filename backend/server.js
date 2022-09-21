@@ -11,22 +11,21 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true }
-);
-const connection = mongoose.connection;
 
+// DB
+mongoose.connect(uri, { useNewUrlParser: true });
+const connection = mongoose.connection;
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
+// Routes
 const recipesRouter = require('./routes/recipes');
-// const usersRouter = require('./routes/users');
-
-// mrmanager menu route
+const homeRouter = require('./routes/home');
 const ingredientRouter = require('./routes/ingredients');
 
+app.use('/', homeRouter);
 app.use( '/recipes', recipesRouter);
-//app.use('/users', usersRouter);
 app.use('/ingredients', ingredientRouter);
 
 app.listen(port, () => {
