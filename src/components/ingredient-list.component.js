@@ -14,8 +14,6 @@ const Ingredients = props => (
       <Link to={'/ingredients/update/' + props.ingredient._id}>edit</Link> 
       &nbsp;|&nbsp;
       <a href="#" onClick={() => { props.deleteIngredient(props.ingredient._id)}}>delete</a>
-      &nbsp;|&nbsp;
-      <Link to={'/ingredients/create/'}>create</Link> 
     </td>
   </tr>
 )
@@ -102,6 +100,8 @@ export default class IngredientsList extends Component {
               {this.ingredientList()}
             </tbody>
             </table>
+          <br/>
+          <Link className="btn btn-dark" to={'/ingredients/create/'}>create a new ingredient</Link> 
         </div>
       );
     } else {

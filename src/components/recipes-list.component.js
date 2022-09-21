@@ -98,6 +98,8 @@ export default class RecipesList extends Component {
               {this.recipeList()}
             </tbody>
           </table>
+          <br/>
+          <Link className="btn btn-dark" to={'/recipes/create/'}>create a new recipes</Link> 
         </div>
       );
     } else {

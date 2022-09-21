@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Home from './components/entity.component';
+
 import Navbar from './components/navbar.component';
 
 import IngredientList from './components/ingredient-list.component';
@@ -34,6 +36,8 @@ function App() {
         <Route path="/spiegel" element={<Spiegel />} />
 
       </Routes>
+      <br/>
+      <Home />
     </div>
     </BrowserRouter>
   );
