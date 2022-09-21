@@ -85,8 +85,7 @@ export default class IngredientsList extends Component {
             <div className="alert alert-success row">
               <h4 className="col-11">Total Ingredients Available</h4>
               <div className="col-1">
-                <h4>{this.state.count}
-                </h4>
+                <h4>{this.state.count}</h4>
               </div>
             </div>
           </div>

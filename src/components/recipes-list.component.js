@@ -26,9 +26,11 @@ export default class RecipesList extends Component {
 //    this.deleteExercise= this.deleterecipe.bind(this);
     this.state = {
       connection: false,
-      recipes: []
+      recipes: [],
+      count: this.getTotal()
     };
   }
+
   componentDidMount() {
     axios.get('http://localhost:17000/recipes/')
       .then(res => {
@@ -48,12 +50,25 @@ export default class RecipesList extends Component {
     });
   }
 
+  getTotal() {
+    axios.get('http://localhost:17000/recipes/count/')
+      .then(res => {
+        this.setState({
+          count: res.data
+        })
+      })
+      .catch((err) => {
+        console.log("Axios error ", err);
+        this.setState({ connection: false })
+      })
+  }
+
   deleteRecipe(id) {
     axios.delete('http://localhost:17000/recipes/delete/' + id)
       .then(res => console.log(res.data));
     this.setState({
-      recipes: this.state.recipe.filter(el => el._id !== id)
-    });
+      recipes: this.state.recipes.filter(el => el._id !== id)
+    })
   }
 
   render() {
@@ -61,6 +76,14 @@ export default class RecipesList extends Component {
       return (
         <div>
           <h3>Logged Recipes</h3>
+          <div className="container">
+            <div className="alert alert-success row">
+              <h4 className="col-11">Total Recipes Available</h4>
+              <div className="col-1">
+                <h4>{this.state.count}</h4>
+              </div>
+            </div>
+          </div>
           <table className='table'>
             <thead className='thead-light'>
               <tr>

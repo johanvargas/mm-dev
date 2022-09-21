@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import bindIngredient from './bindingredient.component';
+//import bindIngredient from './bindingredient.component';
 
 export default class CreateUser extends Component {
   constructor(props) {
